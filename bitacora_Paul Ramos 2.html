@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Bitácora Digital: Gestión Estratégica del Aprendizaje</title>
+    <!-- Favicon para un toque personal: un libro y un pico, simbolizando estudio y trabajo -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2393C5FD' d='M21 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 20V4h14l.001 16H7zm6-4v-2h-2v2H9v-2H7v2h2v2h2v-2h2v2h2v-2h2v2h2v-2h-2v-2h-2v2h-2zm-6-4v-2H7v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zm-8-4v-2H7v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zm2 0v-2h-2v2h2zM10 8h2V6h-2zM6 8h2V6H6zm8 0h2V6h-2zM18 6v2h-2V6h2z'/%3E%3Cpath fill='%23E0E0E0' d='M10 12l-1 1l-1-1l-1 1l1 1l1-1l1 1zm4 0l-1 1l-1-1l-1 1l1 1l1-1l1 1zM8 4V2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2V4z'/%3E%3C/svg%3E" type="image/svg+xml">
+    
+    <style>
+        /* General Styles */
+        :root {
+            --bg-color: #1a1a2e; /* Main dark background */
+            --card-bg: #16213e; /* Background for cards/modules */
+            --text-color: #e0e0e0; /* Light text color */
+            --accent-color: #0f3460; /* Accent color for interactive elements */
+            --highlight-color: #93c5fd; /* Highlight color (light blue) */
+            --secondary-highlight: #7b4c9f; /* Secondary highlight (violet) */
+            --border-color: #001f44; /* Subtle border color */
+            --font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+            --border-radius: 12px; /* More rounded corners */
+            --padding-base: 20px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: var(--padding-base);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            width: 100%;
+            max-width: 1200px; /* Increased max-width for modern feel */
+            padding: calc(var(--padding-base) * 1.5);
+            box-sizing: border-box;
+            border: 1px solid var(--border-color); /* Subtle border */
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--highlight-color);
+            margin-top: 0;
+            text-align: center; /* Center headings for a cleaner look */
+        }
+
+        h1 {
+            font-size: 2.8em; /* Larger main title */
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(147, 197, 253, 0.7); /* More prominent glow */
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--secondary-highlight); /* Violet accent line */
+            padding-bottom: 10px;
+            margin-top: 40px;
+            text-align: left; /* Align module titles to left */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between icon and text */
+        }
+
+        h3 {
+            font-size: 1.6em;
+            margin-top: 25px;
+            color: var(--text-color); /* H3s slightly less highlighted */
+            border-bottom: 1px dashed var(--border-color); /* Dashed line for sub-sections */
+            padding-bottom: 5px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: var(--highlight-color);
+        }
+
+        strong {
+            color: var(--highlight-color);
+        }
+
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            gap: 5px; /* Gap between buttons */
+        }
+
+        .tab-button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 15px 25px; /* Larger buttons */
+            cursor: pointer;
+            font-size: 1.1em; /* Larger font for buttons */
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between button icon and text */
+        }
+
+        .tab-button:hover {
+            background-color: #1b4787; 
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-button.active {
+            background-color: var(--highlight-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            border-bottom: 2px solid var(--highlight-color);
+            transform: translateY(0);
+            box-shadow: 0 0 20px rgba(147, 197, 253, 0.8); /* Stronger glow for active tab */
+        }
+
+        .tab-content {
+            display: none;
+            padding: var(--padding-base);
+            background-color: var(--card-bg);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            animation: fadeIn 0.6s ease-in-out; /* Slower fade-in */
+            border: 1px solid var(--border-color); /* Border for content area */
+            border-top: none; /* No top border to blend with tab buttons */
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: calc(var(--padding-base) / 2); /* Less padding on small screens */
+            }
+            .container {
+                padding: var(--padding-base);
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tab-button {
+                margin: 5px 0;
+                border-radius: var(--border-radius);
+                font-size: 1em;
+            }
+            .tab-button.active {
+                border-bottom: none;
+                border: 2px solid var(--highlight-color);
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        /* Specific Content Styles */
+        ul {
+            list-style-type: none; /* Remove default bullet */
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            padding-left: 30px; /* Space for custom bullet */
+            position: relative;
+        }
+
+        ul li::before {
+            content: '🚀'; /* Rocket emoji for list items */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2em;
+            color: var(--highlight-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify; /* Justify text for a cleaner look */
+        }
+
+        .icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+
+        /* Custom icon styling for headings */
+        h2 .icon {
+            font-size: 1.5em; /* Larger icons for H2 */
+            color: var(--secondary-highlight); /* Violet color for H2 icons */
+        }
+
+        /* Custom icons for specific list items if needed */
+        li.challenge::before {
+            content: '🚧'; /* Construction cone for challenges */
+            color: #FFD700; /* Gold */
+        }
+        li.solution::before {
+            content: '💡'; /* Lightbulb for solutions */
+            color: #FFECB3; /* Light yellow */
+        }
+        li.learning::before {
+            content: '🧠'; /* Brain for learnings */
+            color: #B3E0FF; /* Light blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mi Bitácora Digital: Gestión Estratégica del Aprendizaje</h1>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'intro')">
+                <span class="icon">✨</span> Introducción
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'modulo1')">
+                <span class="icon">⚙️</span> Módulo 1: Requerimientos
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'modulo2')">
+                <span class="icon">📝</span> Módulo 2: Ejecución Reflexiva
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'modulo3')">
+                <span class="icon">⏰</span> Módulo 3: Regulación
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'modulo4')">
+                <span class="icon">🤝</span> Módulo 4: Interacción Digital
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'conclusiones')">
+                <span class="icon">📈</span> Conclusiones
+            </button>
+        </div>
+
+        <div id="intro" class="tab-content active">
+            <h2><span class="icon">✨</span> Mi Compromiso como Estudiante-Minero</h2>
+            <p>¡Bienvenidos a mi bitácora digital! Soy un estudiante universitario y trabajador a tiempo completo en la mina, enfrentando turnos rotativos de 7x7. Este espacio en Notion no es solo un registro; es mi herramienta clave para la **autorregulación del aprendizaje**. Aquí documento cómo planifico, ejecuto y reflexiono sobre mis actividades académicas, mientras navego los desafíos de mi doble vida. Mi objetivo es demostrar cómo, a pesar de las exigencias, logro un aprendizaje efectivo y constante.</p>
+        </div>
+
+        <div id="modulo1" class="tab-content">
+            <h2><span class="icon">⚙️</span> Módulo 1: Requerimientos y el Terreno de Juego del Bloque B</h2>
+            <p>Entender el campo de batalla es el primer paso para ganar. En este módulo, detallo los requisitos y condiciones de mis cursos del Bloque B: Cálculo Diferencial, Gestión de la Información y del Aprendizaje, y Laboratorio de Liderazgo e Innovación Intermedio.</p>
+
+            <h3>1.1. Las Herramientas del Oficio y sus Exigencias</h3>
+            <p>Cada curso tiene sus particularidades, y conocerlas me permite prepararme.</p>
+            <ul>
+                <li><strong>Cálculo Diferencial:</strong> Necesito una base sólida en conceptos y dominio de resolución de problemas. La exigencia es la precisión.</li>
+                <li><strong>Gestión de la Información y del Aprendizaje:</strong> Aquí el foco está en la organización y la aplicación práctica. El uso de **Autodesk Inventor** para prototipado 3D es clave, así como la correcta estructuración de bitácoras digitales (como esta).</li>
+                <li><strong>Laboratorio de Liderazgo e Innovación Intermedio:</strong> Demanda participación activa en proyectos grupales, presentaciones efectivas y capacidad de coordinación.</li>
+            </ul>
+            <p>En cuanto a las plataformas, las **entregas en PDF** son un estándar. Las clases y foros se desarrollan en la **plataforma virtual de la universidad** (Blackboard/Canvas), y las coordinaciones grupales suelen ser por **Zoom o Google Meet**. Cada uno de estos requisitos técnicos y metodológicos influye directamente en mi planificación. Saber que Inventor es crucial en Gestión, por ejemplo, me obliga a buscar tutoriales con antelación, aprovechando mis tiempos de descanso en la mina. El formato PDF significa que debo ser pulcro en la presentación final de mis trabajos, mientras que la interacción en las plataformas virtuales es fundamental para mi participación y notas.</p>
+
+            <h3>1.2. Vientos a Favor y Obstáculos en el Camino</h3>
+            <p>Reconocer lo que me impulsa y lo que me frena es vital para una estrategia efectiva.</p>
+            <h4>Condiciones que me facilitan el aprendizaje:</h4>
+            <ul>
+                <li><strong>Espacio de Estudio Dedicado:</strong> Tengo un pequeño rincón en casa donde, si no hay bulla, puedo concentrarme y estudiar tranquilo. Esto es un lujo invaluable, lejos del ajetreo de la mina.</li>
+                <li><strong>Aprovechamiento de Tiempos Muertos:</strong> Durante mis turnos en la mina, en los momentos de baja actividad o en mis pausas, aprovecho para leer material, repasar conceptos o adelantar tareas que no requieren conexión a internet. Cada minuto cuenta.</li>
+            </ul>
+            <h4>Desafíos previstos:</h4>
+            <ul>
+                <li class="challenge"><strong>Horario Pesado y Rotativo:</strong> Sin duda, mi mayor reto. Los turnos rotativos de 7x7, especialmente los de noche, desorganizan mi ciclo de sueño y afectan mi energía.</li>
+                <li class="challenge"><strong>Desorganización Personal:</strong> A veces, mi propia tendencia a postergar o la falta de una planificación estricta me juegan en contra, especialmente cuando la carga de trabajo se acumula.</li>
+                <li class="challenge"><strong>Cansancio Físico y Mental:</strong> Después de jornadas extenuantes en la mina, el agotamiento físico puede sabotear mi concentración y motivación para sentarme a estudiar. Es una batalla constante.</li>
+            </ul>
+            <p>Para abordar esto desde el inicio, planeo ser más rígido con mi calendario en Google Calendar y usar Notion para desglosar tareas grandes en mini-tareas, haciéndolas menos abrumadoras. También intentaré dedicar los primeros minutos de mi tiempo de estudio a lo más complejo, antes de que el cansancio haga mella.</p>
+        </div>
+
+        <div id="modulo2" class="tab-content">
+            <h2><span class="icon">📝</span> Módulo 2: La Ejecución Reflexiva: Aprendiendo en Cada Turno</h2>
+            <p>Aquí detallo cómo abordo mis tareas, no solo cumpliéndolas, sino extrayendo lecciones valiosas de cada proceso.</p>
+
+            <h3>2.1. Navegando las Tareas Clave</h3>
+            <p>Mis cursos implican una variedad de tareas que requieren diferentes enfoques.</p>
+            <ul>
+                <li><strong>Ejercicios de Cálculo Diferencial (Derivadas, Límites):</strong> Mi enfoque es la práctica constante. Primero, reviso la teoría y los ejemplos del profesor. Luego, intento resolver los ejercicios propuestos. Si me estanco, reviso mi proceso para identificar el error.</li>
+                <li><strong>Proyectos Grupales y Presentaciones (Liderazgo):</strong> Estos requieren una planificación colaborativa. Inicialmente, defino mi rol y las tareas específicas que asumiré. Luego, coordino con el equipo para establecer cronogramas y asegurar que todos cumplan sus partes.</li>
+                <li><strong>Creación de Prototipos 3D y Bitácoras Organizadas (Gestión del Aprendizaje):</strong> Aquí la clave es la precisión y la estructura. Para Inventor, sigo tutoriales y practico la manipulación de las herramientas. Para las bitácoras, me enfoco en la claridad, la organización lógica y el uso de las funcionalidades de Notion para mantener todo pulcro.</li>
+            </ul>
+
+            <h3>2.2. Reflexiones Profundas sobre el Proceso</h3>
+            <p>Cada tarea es una oportunidad de aprendizaje, tanto por su contenido como por el proceso de abordarla.</p>
+
+            <h4>Desafíos en Cálculo y Soluciones Implementadas:</h4>
+            <ul>
+                <li class="challenge"><strong>Desafío:</strong> A veces, me saturo con la cantidad de fórmulas complejas y los ejercicios no salen a la primera. Es fácil frustrarse.</li>
+                <li class="solution"><strong>Solución:</strong> He descubierto que buscar **ejemplos y tutoriales en YouTube** que expliquen los pasos de forma visual me ayuda enormemente. También, preguntar a compañeros que dominan el tema, aunque sea por WhatsApp, me ahorra mucho tiempo de frustración.</li>
+                <li class="learning"><strong>Aprendizaje:</strong> No hay que tener miedo a pedir ayuda ni a buscar recursos externos. La frustración es parte del proceso, pero la perseverancia y la diversificación de fuentes de información son clave.</li>
+            </ul>
+
+            <h4>Desafíos en Proyectos Grupales (Liderazgo) y Soluciones Implementadas:</h4>
+            <ul>
+                <li class="challenge"><strong>Desafío:</strong> Coordinar con compañeros cuando todos tienen horarios distintos (especialmente con mi horario minero) es un rompecabezas. La postergación de uno afecta a todos.</li>
+                <li class="solution"><strong>Solución:</strong> Hemos implementado reuniones cortas y frecuentes por **Google Meet o Zoom**, siempre con una agenda clara. Uso Notion para llevar un registro de tareas asignadas y fechas límite, visible para todos. Me "obligo a sentarme 20 min" aunque no tenga ganas para adelantar mi parte, lo que suele hacer que luego fluya.</li>
+                <li class="learning"><strong>Aprendizaje:</strong> La **comunicación proactiva y el establecimiento de expectativas claras** desde el principio son vitales en el trabajo en equipo. La flexibilidad y la confianza en el equipo son esenciales.</li>
+            </ul>
+
+            <h4>Desafíos en Prototipos 3D y Bitácoras (Gestión) y Soluciones Implementadas:</h4>
+            <ul>
+                <li class="challenge"><strong>Desafío:</strong> La curva de aprendizaje de un software como Autodesk Inventor puede ser empinada, y la tentación de la **procrastinación** es alta. A veces, la propia desorganización interna de mi Notion me juega en contra si no lo mantengo actualizado.</li>
+                <li class="solution"><strong>Solución:</strong> Divido el aprendizaje de Inventor en pequeños módulos y practico una función a la vez. Para la bitácora, me he forzado a sentar las bases de la estructura desde el inicio y a mantenerla actualizada semanalmente, casi como un hábito.</li>
+                <li class="learning"><strong>Aprendizaje:</strong> La **consistencia supera la intensidad**. Es mejor avanzar un poco cada día que intentar hacerlo todo de golpe. La organización digital es un proceso continuo que requiere mantenimiento.</li>
+            </ul>
+        </div>
+
+        <div id="modulo3" class="tab-content">
+            <h2><span class="icon">⏰</span> Módulo 3: Mi Brújula de Tiempo y Esfuerzo: Minero de la Productividad</h2>
+            <p>La gestión del tiempo es mi mina de oro. Este módulo demuestra cómo regulo mis recursos para cumplir con mis metas.</p>
+
+            <h3>4.1. Mi Tablero de Control Digital</h3>
+            <p>Para no perder el rumbo, utilizo una combinación de herramientas:</p>
+            <ul>
+                <li><strong>Google Calendar:</strong> Es mi mapa principal. Aquí marco todas las fechas de entrega, reuniones y bloques de estudio. Uso recordatorios para las tareas más críticas.
+                    <!-- Aquí iría una captura de pantalla de tu Google Calendar -->
+                    <p><em>[Captura de pantalla de mi Google Calendar con bloques de estudio y entregas marcadas]</em></p>
+                </li>
+                <li><strong>Notion como Agenda y Lista de Pendientes:</strong> Dentro de mi espacio de Notion, tengo bases de datos para cada curso con vistas de tablero Kanban y listas de pendientes. Esto me permite ver el estado de cada tarea y priorizar.
+                    <!-- Aquí iría una captura de pantalla de tu Notion -->
+                    <p><em>[Captura de pantalla de mi Notion con la vista de una base de datos de tareas o mi agenda semanal]</em></p>
+                </li>
+            </ul>
+            <p>A veces, confío demasiado en mi memoria (¡el error clásico!), pero estas herramientas son mi red de seguridad. Me permiten visualizar la carga de trabajo y planificar mis "turnos de estudio" con la misma rigidez con la que planifico mis turnos en la mina.</p>
+
+            <h3>4.2. Estrategias Antiprocrastinación y Recarga</h3>
+            <p>Peleo todos los días contra la procrastinación y el cansancio.</p>
+            <ul>
+                <li><strong>Técnica Pomodoro (Reforzando Disciplina):</strong> Estoy comprometido a ser más disciplinado con esta técnica. Trabajar 25 minutos y descansar 5, especialmente en Cálculo o cuando estoy muy cansado, me ayuda a mantener la concentración y evita el agotamiento mental.</li>
+                <li><strong>Bloques Fijos de Estudio:</strong> A pesar de los turnos rotativos, he identificado "ventanas de oportunidad" donde reservo bloques fijos para estudiar, sin excusas. Trato de que sea lo primero que hago al levantarme o al llegar a casa si la energía lo permite.</li>
+                <li><strong>Priorizar lo Urgente y lo Importante:</strong> Estoy aprendiendo a dejar de lado el perfeccionismo excesivo y a enfocarme en lo que realmente suma para la calificación y el aprendizaje. Delegar o pedir ayuda cuando es necesario también es parte de esto.</li>
+                <li><strong>Manejo del Cansancio y Distracciones:</strong> Cuando el cansancio es extremo, priorizo el descanso. Para las distracciones (música, memes, WoW), uso aplicaciones de bloqueo de sitios web o simplemente me aseguro de que mi espacio de estudio esté libre de ellas. A veces, solo levantarme y estirarme por 5 minutos ayuda a reiniciar la concentración.</li>
+            </ul>
+            <p>Estas estrategias son un campo de batalla diario, pero la **disciplina y la constancia** son mis principales aliados.</p>
+        </div>
+
+        <div id="modulo4" class="tab-content">
+            <h2><span class="icon">🤝</span> Módulo 4: Conviviendo en la Mina Digital: Interacción y Colaboración</h2>
+            <p>La universidad también es un espacio de interacción, y mi participación digital es tan importante como mi trabajo individual.</p>
+
+            <h3>5.1. Reflexiones sobre la Interacción Digital</h3>
+            <p>Mis interacciones ocurren principalmente en **WhatsApp** (para la coordinación rápida de grupos), los **foros de la plataforma virtual** (para discusiones más formales y dudas al docente), y **Google Meet/Zoom** (para reuniones en vivo).</p>
+            <p>Procuro mantener una **comunicación clara y directa**, sin dar rodeos. El **respeto mutuo** es fundamental; entiendo que todos estamos bajo presión, y la empatía es clave. Participo activamente, no solo cuando tengo dudas, sino también cuando puedo aportar con ideas o soluciones, incluso con un "meme productivo" que aligere el ambiente.</p>
+
+            <h3>5.2. Historias de Colaboración Exitosa</h3>
+            <h4>Ejemplo 1: Rescate de Presentación Grupal (Liderazgo)</h4>
+            <ul>
+                <li><strong>Contexto:</strong> Un día antes de la entrega de una presentación clave para Liderazgo, el equipo se dio cuenta de que no estábamos del todo alineados y el tiempo se nos venía encima.</li>
+                <li><strong>Mi Rol:</strong> Propuse una **videollamada rápida por Google Meet** esa misma noche, a pesar de lo tarde que era. Me encargué de moderar la reunión y de asignar roles de último minuto para optimizar el tiempo.</li>
+                <li><strong>Por qué fue Positiva:</strong> La comunicación fue directa, cada uno aportó ideas claras y se comprometió con su parte. La eficiencia fue máxima y logramos armar la presentación en tiempo récord. Fue un claro ejemplo de cómo una **interacción bajo presión** puede ser altamente productiva si hay compromiso y claridad.</li>
+                <li><strong>Contribución al Aprendizaje:</strong> Aprendí a **confiar más en la capacidad de respuesta y participación de mis compañeros** y en la eficacia de las reuniones bien estructuradas, incluso en situaciones límite. Me demostró que la colaboración real se manifiesta en la adversidad.</li>
+            </ul>
+            <!-- Aquí podrías añadir una captura de pantalla anonimizada si tuvieras -->
+            <p><em>[Posible captura de pantalla anonimizada de una conversación de grupo o foro]</em></p>
+        </div>
+
+        <div id="conclusiones" class="tab-content">
+            <h2><span class="icon">📈</span> Conclusiones y el Horizonte del Ingeniero</h2>
+            <p>Este Bloque B ha sido un claro testimonio de que la **autorregulación del aprendizaje es mi mayor activo** como estudiante-minero. He logrado integrar de forma más eficiente mi exigente rutina laboral con mis responsabilidades universitarias.</p>
+
+            <h3>Logros Principales:</h3>
+            <ul>
+                <li><strong>Planificación Robusta:</strong> Mi uso de Notion y Google Calendar ha mejorado significativamente, permitiéndome tener una visión más clara de mis tareas y plazos.</li>
+                <li><strong>Resiliencia en la Ejecución:</strong> He demostrado capacidad para enfrentar desafíos complejos (Cálculo, Inventor) y encontrar soluciones efectivas, aprendiendo de cada obstáculo.</li>
+                <li><strong>Gestión del Tiempo Afinada:</strong> Aunque la procrastinación sigue siendo una batalla, mis estrategias de Pomodoro y bloqueo de tiempo me han permitido avanzar consistentemente, incluso con el cansancio.</li>
+                <li><strong>Colaboración Activa:</strong> He participado de forma constructiva en mis equipos, entendiendo que la comunicación efectiva es tan valiosa como el conocimiento individual.</li>
+            </ul>
+
+            <h3>Áreas de Mejora:</h3>
+            <ul>
+                <li><strong>Consistencia en la Lucha contra la Procrastinación:</strong> Aún necesito ser más firme en iniciar tareas cuando el cansancio o la distracción aparecen.</li>
+                <li><strong>Balance entre Vida Académica, Laboral y Personal:</strong> Sigo buscando el punto óptimo para tener un poco más de "vida social" sin sacrificar mis objetivos.</li>
+            </ul>
+
+            <h3>El Camino a Seguir:</h3>
+            <p>En el futuro, aplicaré estas lecciones de **gestión, disciplina y resiliencia** en los siguientes bloques de mi carrera y, sin duda, en mi rol como ingeniero. Esta bitácora es mi manifiesto de que con **motivación y estrategia**, es posible avanzar, terminar la carrera y "patear traseros profesionales". ¡El camino del ingeniero minero es duro, pero la satisfacción de superarse es la mejor recompensa!</p>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabId) {
+            // Declare all variables
+            var i, tabcontent, tabbuttons;
+
+            // Get all elements with class="tab-content" and hide them
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove('active'); // Remove active class for animation
+            }
+
+            // Get all elements with class="tab-button" and remove the "active" class
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabId).style.display = "block";
+            document.getElementById(tabId).classList.add('active'); // Add active class for animation
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Open the introduction tab by default when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".tab-button").click();
+        });
+    </script>
+</body>
+</html>
